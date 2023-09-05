@@ -4,15 +4,25 @@ import { useState } from "react";
 import { ImMenu, ImPlus } from "react-icons/im";
 
 export default function Header() {
-  const [openMenu, setOpenMenu] = useState(true);
+  const [openMenu, setOpenMenu] = useState(false);
 
   return (
-    <header className="bg-[var(--purple)] sticky top-0 text-3xl p-2">
-      <button onClick={() => setOpenMenu(!openMenu)}>
-        <ImMenu />
-      </button>
-      {openMenu && (
-        <form className="flex gap-2 text-sm justify-between">
+    <header className="bg-[var(--purple)] sticky top-0 p-2">
+        <div className={`flex items-center ${openMenu && "pb-2"}`}>
+            <button onClick={() => setOpenMenu(!openMenu)} className="text-3xl">
+                <ImMenu />
+            </button>
+            <h1 className="text-xl font-bold justify-self-center">Lista de Compras</h1>
+        </div>
+     
+        <form 
+        className={`flex gap-2 text-sm justify-between ${openMenu ? "visible" : "hidden"}`}
+        style={{
+          opacity: openMenu ? 1 : 0,
+          maxHeight: openMenu ? "1000px" : "0",
+          transition: "max-height 400ms ease-in-out, opacity 400ms ease-in-out",
+        }}
+      >
           <input
             type="text"
             name="product"
@@ -31,7 +41,6 @@ export default function Header() {
             <ImPlus />
           </button>
         </form>
-      )}
     </header>
   );
 }
