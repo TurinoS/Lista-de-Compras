@@ -16,6 +16,7 @@ type AppContextType = {
     quantity: string;
     setQuantity: React.Dispatch<React.SetStateAction<string>>;
     items: Item[];
+    handleDeleteItem: (idToDelete: string) => void;
 };
 
 export const AppContext = createContext<AppContextType>({
@@ -25,6 +26,7 @@ export const AppContext = createContext<AppContextType>({
     quantity: "",
     setQuantity: () => {},
     items: [],
+    handleDeleteItem: (idToDelete: string) => {},
 });
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
@@ -62,8 +64,15 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     setProduct("");
     setQuantity("");
   };
+
+  const handleDeleteItem = (idToDelete: string) => {
+    const updatedItems = items.filter((item) => item.id !== idToDelete);
+    setItems(updatedItems);
+    localStorage.setItem("items", JSON.stringify(updatedItems));
+  };
+
     return (
-        <AppContext.Provider value={{ handleSubmit, product, setProduct, quantity, setQuantity, items }}>
+        <AppContext.Provider value={{ handleSubmit, product, setProduct, quantity, setQuantity, items, handleDeleteItem }}>
             {children}
         </AppContext.Provider>
     );

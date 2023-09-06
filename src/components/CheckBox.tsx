@@ -1,15 +1,18 @@
 'use client'
 
-import { useState } from 'react';
+import { AppContext } from '@/context/AppContext';
+import { useContext, useState } from 'react';
 import { AiFillEdit } from 'react-icons/ai'
 
 interface CheckBoxProps {
     name: string
     qtt: string
+    id: string
 }
 
-export default function CheckBox({ name, qtt }: CheckBoxProps) {
+export default function CheckBox({ name, qtt, id }: CheckBoxProps) {
     const [isChecked, setIsChecked] = useState(false);
+    const { handleDeleteItem } = useContext(AppContext)
 
     return(
         <div className="rounded bg-[var(--black)] flex justify-between items-center px-2 py-1 text-lg">
@@ -19,7 +22,10 @@ export default function CheckBox({ name, qtt }: CheckBoxProps) {
             </div>
             <div className='flex gap-4 items-center'>
                 <p className={isChecked ? "quantity" : ""}>{qtt}</p>
-                <div className='rounded border border-[var(--gray)] p-1 hover:scale-110 hover:border-[var(--white)] cursor-pointer'>
+                <div 
+                    className='rounded border border-[var(--gray)] p-1 hover:scale-110 hover:border-[var(--white)] cursor-pointer'
+                    onClick={() => handleDeleteItem(id)}
+                >
                     <AiFillEdit />
                 </div>
                 

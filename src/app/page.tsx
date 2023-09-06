@@ -23,7 +23,7 @@ export default function Home() {
       <Header />
       <div className='flex flex-col gap-2 py-4 px-1'>
         {storedItems.map((item) => (
-          <CheckBox key={item.id} name={item.produto} qtt={item.quantidade} />
+          <CheckBox key={item.id} id={item.id} name={item.produto} qtt={item.quantidade} />
         ))}
       </div>
       <span className='text-[var(--orange)] text-6xl'><AiFillStar /></span>
