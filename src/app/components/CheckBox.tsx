@@ -19,7 +19,10 @@ export default function CheckBox({ name, qtt }: CheckBoxProps) {
             </div>
             <div className='flex gap-4 items-center'>
                 <p className={isChecked ? "quantity" : ""}>{qtt}</p>
-                <AiFillEdit />
+                <div className='rounded border border-[var(--gray)] p-1 hover:scale-110 hover:border-[var(--white)] cursor-pointer'>
+                    <AiFillEdit />
+                </div>
+                
             </div>
             
         </div>
