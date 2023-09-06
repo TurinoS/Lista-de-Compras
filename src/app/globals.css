@@ -4,6 +4,7 @@
 
 :root {
   --purple: #7a1fa2;
+  --light-gray: #7b7979;
   --gray: #272727;
   --black: #1d1d1d;
   --white: #faf9fa;
@@ -22,3 +23,37 @@ body {
   color: var(--white);
   background-color: var(--gray);
 }
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--light-gray);
+  background-color: transparent;
+  border-radius: 8px;
+  cursor: pointer; 
+}
+
+  input[type="checkbox"]::before {
+    content: "";
+    display: block;
+    width: 17px;
+    height: 17px;
+    margin: 2px; 
+    background-color: var(--light-gray); 
+    border-radius: 4px; 
+    opacity: 0; 
+  }
+
+  input[type="checkbox"]:checked::before {
+    opacity: 1;
+  }
+
+  input[type="checkbox"]:checked + label {
+    color: var(--light-gray);
+  }
+
+  .quantity {
+    color: var(--light-gray);;
+  }
