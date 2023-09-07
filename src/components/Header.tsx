@@ -1,20 +1,37 @@
 "use client";
 
 import { AppContext } from "@/context/AppContext";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { ImMenu, ImPlus } from "react-icons/im";
 
 export default function Header() {
-  const { handleSubmit, product, setProduct, quantity, setQuantity } = useContext(AppContext)
+  const { handleSubmit, product, setProduct, quantity, setQuantity } = useContext(AppContext);
   const [openMenu, setOpenMenu] = useState(false);
 
+  const checkScreenWidth = () => {
+    if (window.innerWidth >= 768) {
+      setOpenMenu(true);
+    } else {
+      setOpenMenu(false);
+    }
+  };
+
+  useEffect(() => {
+    checkScreenWidth();
+    window.addEventListener('resize', checkScreenWidth);
+
+    return () => {
+      window.removeEventListener('resize', checkScreenWidth);
+    };
+  }, []);
+
   return (
-    <header className="bg-[var(--purple)] sticky top-0 p-3 rounded-b">
-      <div className={`flex items-center ${openMenu && "mb-2 pb-1 border-b"}`}>
-        <button onClick={() => setOpenMenu(!openMenu)} className="text-3xl">
+    <header className="bg-[var(--purple)] sticky top-0 p-3 rounded-b md:flex md:justify-between md:px-8">
+      <div className={`flex items-center ${openMenu && "mb-2 pb-1 md:m-0 border-b"}`}>
+        <button onClick={() => setOpenMenu(!openMenu)} className="text-3xl md:hidden">
           <ImMenu />
         </button>
-        <h1 className="text-xl font-bold m-auto">Lista de Compras</h1>
+        <h1 className="text-xl font-bold m-auto md:text-3xl">Lista de Compras</h1>
       </div>
 
       <form

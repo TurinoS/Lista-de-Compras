@@ -1,32 +1,32 @@
-'use client'
+"use client";
 
 import React, { createContext, ReactNode, useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 
 type Item = {
-    id: string;
-    produto: string;
-    quantidade: string;
-  };  
+  id: string;
+  produto: string;
+  quantidade: string;
+};
 
 type AppContextType = {
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-    product: string;
-    setProduct: React.Dispatch<React.SetStateAction<string>>;
-    quantity: string;
-    setQuantity: React.Dispatch<React.SetStateAction<string>>;
-    items: Item[];
-    handleDeleteItem: (idToDelete: string) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  product: string;
+  setProduct: React.Dispatch<React.SetStateAction<string>>;
+  quantity: string;
+  setQuantity: React.Dispatch<React.SetStateAction<string>>;
+  items: Item[];
+  handleDeleteItem: (idToDelete: string) => void;
 };
 
 export const AppContext = createContext<AppContextType>({
-    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {},
-    product: "",
-    setProduct: () => {},
-    quantity: "",
-    setQuantity: () => {},
-    items: [],
-    handleDeleteItem: (idToDelete: string) => {},
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => {},
+  product: "",
+  setProduct: () => {},
+  quantity: "",
+  setQuantity: () => {},
+  items: [],
+  handleDeleteItem: (idToDelete: string) => {},
 });
 
 export function AppContextProvider({ children }: { children: ReactNode }) {
@@ -71,9 +71,19 @@ export function AppContextProvider({ children }: { children: ReactNode }) {
     localStorage.setItem("items", JSON.stringify(updatedItems));
   };
 
-    return (
-        <AppContext.Provider value={{ handleSubmit, product, setProduct, quantity, setQuantity, items, handleDeleteItem }}>
-            {children}
-        </AppContext.Provider>
-    );
+  return (
+    <AppContext.Provider
+      value={{
+        handleSubmit,
+        product,
+        setProduct,
+        quantity,
+        setQuantity,
+        items,
+        handleDeleteItem,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 }
